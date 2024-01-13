@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="main.js" defer> </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+          });
+      }
+    </script>
+    <link rel="shortcut icon" href="images/icons/icon-512.png" type="image/x-icon">
+    <title>Pratik Rathod</title>
+  </head>
+  <body>
+  <!--gap body-->
+    <!-- NAVIGATION -->
+    <nav>
+      <input type="checkbox" id = 'navbar' unchecked>
+      <button class="button" to="home"><img src="./images/Home.png" alt=""></button>
+      <button class="button" to="aboutme"><img src="./images/person.png" alt=""></button>
+      <button class="button" to="contactme"><img src="./images/contact.png" alt=""></button>
+      <span></span>
+    </nav>
+  <!-- gap body-->
+    <!-- 3D-CUBE -->
+    <div class="container">
+      <!-- gap container-->
+      <div class="layer-1">
+      <div class="layer-2">
+        <main class="about">
+            <h1 class="welcome">Welcome!😄</h1>
+            <section>
+              <!-- gap -->
+              <div class="me">
+                <img src="" alt="MyImg" srcset="">
+              </div>
+              <div class="description">
+                <p>Hello! and welcome to my Website!,
+                  My name is Pratik Rathod !,
+                  I am skilled in front-end web development 
+                  and constantly growing my knowledge to become
+                  a full-stack web-developer !
+                </p>
+              </div>
+              <!-- gap -->
+              <!-- gap -->
+            </section>
+        </main>
+      </div>
+      </div>
+      <!-- gap container-->
+      <!-- gap container-->
+      <div class="layer-1">
+      <div class="layer-2">
+          <section class="skills">
+          <ul class="list">
+            <li class="list-items">JavaScript<img src="" alt="JavaScript"></li>
+            <li class="list-items">HTML5<img src="" alt="HTML5"></li>
+            <li class="list-items">CSS3<img src="" alt="CSS3"></li>
+            <li class="list-items">Java<img src="" alt="Java"></li>
+            <li class="list-items">Python<img src="" alt="Python"></li>
+          </ul>
+          </section>
+      </div>
+      </div>
+      <!-- gap container-->
+      <!-- gap container-->
+      <div class="layer-1">
+      <div class="layer-2">
+          <section class="contactme">
+          <ul class="contactme list">
+            <li class="list-items"><a href="http://">LinkedIn</a></li>
+            <li class="list-items"><a href="mailto:">E-mail</a></li>
+            <li class="list-items"><a href="http://">GitHub</a></li>
+          </ul>
+          </section> 
+      </div>
+      </div>
+    <!-- gap container-->
+    </div>
+  <!-- gap body-->
+  </body>
+</html>

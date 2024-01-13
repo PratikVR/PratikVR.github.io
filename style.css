@@ -1,0 +1,181 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    /* debug lines!! */
+    /* outline: 1px solid red;  */
+}
+
+
+/* 
+    Explaination of layers : 
+    layer-1 is an rotation layer which has a set rotation value 
+    layer-2 is the content container which is at fixed distance from the layer which
+    that provides the cube effect and maintains the content scroll on each page!
+
+*/
+@property --rotate-x{
+    syntax: "<angle>";
+    inherits:true;
+    initial-value : 0deg;
+}
+@property --rotate-y{
+    syntax: "<angle>";
+    inherits:true;
+    initial-value : 0deg;
+}
+@property --rotate-z{
+    syntax: "<angle>";
+    inherits:true;
+    initial-value : 0deg;
+}
+@property --perspective{
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+body{
+    overflow: hidden;
+}
+.container{
+    --perspective: max(100svh,100svw);
+    --rotate-x:0deg;
+    --rotate-y:0deg;
+    --rotate-z:0deg;
+    position:absolute;
+    perspective: var(--perspective);
+    height: 100svh;
+    width: 100svw;
+    padding: .3px;
+    display: block;
+    background-color: cadetblue;
+}
+.layer-1{
+    position: absolute;   
+    height: calc(100% - .3px);
+    width: calc(100% - .3px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-origin: center;
+    transition: transform 1s ease-in-out;
+}
+.layer-1:nth-of-type(1){
+    transform: 
+    translateZ( calc( calc(-1 * var(--perspective)) / 2 ))
+    rotateX(var(--rotate-x)) 
+    rotateY(var(--rotate-y)) 
+    ;
+}
+.layer-1:nth-of-type(2){
+    transform: 
+    translateZ( calc( calc(-1 * var(--perspective)) / 2 ))
+    rotateX(var(--rotate-x)) 
+    rotateY( calc(-90deg + var(--rotate-y)) ) 
+    ;
+}
+.layer-1:nth-of-type(3){
+    transform: 
+    translateZ( calc( calc(-1 * var(--perspective)) / 2 ))
+    rotateX( calc(90deg + var(--rotate-x)) ) 
+    /* rotateY(var(--rotate-y)) */
+    ;
+}
+.layer-2{
+    display: flex;
+    height: 100%;
+    transform-style: preserve-3d;
+    scale: 1;
+    overflow-x:hidden;
+    overflow-y:auto ;
+    backface-visibility: hidden;
+}
+
+.layer-1:nth-of-type(1) .layer-2{background-color: rgba(127, 255, 212, 0.62);}
+.layer-1:nth-of-type(2) .layer-2{background-color: rgba(255, 99, 71, 0.568);}
+.layer-1:nth-of-type(3) .layer-2{background-color: rgba(65, 105, 225, 0.595);}
+
+.layer-1:nth-of-type(1) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
+.layer-1:nth-of-type(2) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
+.layer-1:nth-of-type(3) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
+
+
+nav{
+    --nav-len:3rem;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    height: var(--nav-len);
+    aspect-ratio: 1;
+    z-index: 13;
+}
+nav span{
+    border-radius:50%;
+    opacity: .4;
+    pointer-events: none;
+    position:absolute;
+    inset: 1rem;
+    background-color: aliceblue;
+    animation: 3s linear infinite throbbing;
+}
+nav button{
+    outline: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.508);
+    background-blend-mode:multiply;
+    position: absolute;
+    inset: 0;
+    scale: 0;
+    text-align: center;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    border-radius:50%;
+}
+nav,nav button{
+    transition: .6s linear transform,1s .4s ease scale;
+}
+nav button :hover{
+    scale: 1.2;
+}
+#navbar{
+    height: var(--nav-len);
+    aspect-ratio: 1;
+    position: absolute;
+    appearance: none;
+    display: block;
+    background-color: black;
+    border-radius: 50%;
+}
+nav:has(:checked) { 
+    transform: translate(calc(var(--nav-len) * 1),calc( var(--nav-len) * -1));
+}
+nav:has(:checked) #navbar{
+    transform: scale(.7);
+}
+nav:has(:checked) span{
+    animation-play-state: paused;
+}
+nav :checked~button{
+    scale:1;
+    pointer-events: initial;
+    display: block;
+}
+nav :checked~[to="home"]{
+    transform: translate(0rem, 4rem);
+}
+nav :checked~[to="aboutme"]{
+    transform:translate( -4rem,4rem);
+}
+nav :checked~[to="contactme"]{
+    transform:translate(-4rem ,0rem);
+}
+
+@keyframes throbbing {
+    0%,100%{
+        transform: scale(1.5);
+    }
+    20%,50%{
+        transform: scale(2);
+    }
+    30%,60%{
+        transform: scale(1.3);
+    }
+}
