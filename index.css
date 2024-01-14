@@ -17,6 +17,7 @@
     display: block;
     background-color: rgba(118, 107, 91, 0.6);
     border-radius: .5rem;
+    max-width: 90svw;
 }
 .welcome{
     width: 92%;
@@ -33,8 +34,8 @@
 }
 
 .me{
-    min-width: 48rem;
     aspect-ratio: 1;
+    min-height: 70vh;
 }
 .me img{
     object-fit: cover;
@@ -44,15 +45,14 @@
     display: block;
 }
 .description{
-    max-width: 48rem;
-    text-align: balance balance;
+    text-align: balance;
     font-size: 2rem;
     line-height: 1.4;
     padding: .5em;
     background-color: rgba(116, 108, 98, 0.6);
     display: block;
     padding-bottom: 6rem;
-    height: 100%;
+    max-width: 90svw;
 }
 .skills .list{
     height: 100%;
@@ -63,12 +63,15 @@
     flex-direction: column;
     justify-content: space-evenly;
     gap:1.5rem;
-    background-color: rgba(116, 108, 98, 0.6);
+    /* background-color: rgba(116, 108, 98, 0.6); */
 }
 .list-items{
     display: block;
     font-size: 2rem;
     height: 3rem;
+    background-color: rgba(116, 108, 98, 0.6);
+    border-radius: .3rem;
+    padding-left:.5rem ;
 }
 
 img{
