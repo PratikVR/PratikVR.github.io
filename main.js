@@ -1,5 +1,9 @@
+window.onload = function() {
+    alert('Page is in development !');
+};
 const container = document.querySelector('.container')
 const navbar = document.querySelectorAll('[to]')
+
 
 navbar.forEach(element=>{
     element.addEventListener('click',(e)=>{

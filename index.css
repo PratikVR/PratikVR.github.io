@@ -1,7 +1,8 @@
 
-.about{
-    background: no-repeat url(./images/bg_img.jpeg) ,linear-gradient(blue,pink);
+.about,.contactme,.skills{
+    background: no-repeat linear-gradient(#0000ff,#ffc0cb);
     background-size: cover;
+    width: 100%;
     height: 100svh;
     padding: .3rem;
     overflow-x: hidden;
@@ -52,4 +53,25 @@
     display: block;
     padding-bottom: 6rem;
     height: 100%;
+}
+.skills .list{
+    height: 100%;
+    width: 100%;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap:1.5rem;
+    background-color: rgba(116, 108, 98, 0.6);
+}
+.list-items{
+    display: block;
+    font-size: 2rem;
+    height: 3rem;
+}
+
+img{
+    font-size: small;
+    font-style: italic;
 }

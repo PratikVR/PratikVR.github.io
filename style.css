@@ -47,7 +47,7 @@ body{
     width: 100svw;
     padding: .3px;
     display: block;
-    background-color: cadetblue;
+    background: linear-gradient( rgb(0, 0, 0) , #8f8787);
 }
 .layer-1{
     position: absolute;   

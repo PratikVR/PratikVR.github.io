@@ -2,11 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="main.js" defer> </script>
+    <link rel="manifest" href="manifest.json">
     <script src="service-worker.js" defer></script>
+    <script src="main.js" defer> </script>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
@@ -78,7 +80,7 @@
       <div class="layer-1">
       <div class="layer-2">
           <section class="contactme">
-          <ul class="contactme list">
+          <ul class="list">
             <li class="list-items"><a href="http://">LinkedIn</a></li>
             <li class="list-items"><a href="mailto:">E-mail</a></li>
             <li class="list-items"><a href="http://">GitHub</a></li>

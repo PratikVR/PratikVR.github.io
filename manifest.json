@@ -5,7 +5,7 @@
   "start_url": "https://PratikVR.github.io",
   "display": "standalone",
   "background_color": "#ffff",
-  "theme_color": "#ffff",
+  "theme_color": "#0000ff",
   "icons": [
     {
       "src": "images/icons/icon-72.png",
