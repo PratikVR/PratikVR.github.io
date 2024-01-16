@@ -65,7 +65,7 @@
     gap:1.5rem;
     /* background-color: rgba(116, 108, 98, 0.6); */
 }
-.list-items{
+.list-items{    
     display: block;
     font-size: 2rem;
     height: 3rem;
@@ -77,4 +77,12 @@
 img{
     font-size: small;
     font-style: italic;
+}
+
+.skills img{
+    height: 2rem;
+    display:inline;
+    object-position: center;
+    object-fit: contain;
+    vertical-align: middle;
 }
