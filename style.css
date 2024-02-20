@@ -1,3 +1,9 @@
+:root{
+    --black-semi-transparent : rgba(58, 58, 58, 0.6);
+    --tomato-semi-transparent :rgba(255, 99, 71, 0.568);
+    --cyan-semi-transparent : rgba(127, 255, 212, 0.62);
+    --metal-blue-semi-transparent :rgba(65, 105, 225, 0.595); 
+}
 *{
     box-sizing: border-box;
     margin: 0px;
@@ -46,7 +52,7 @@ body{
     width: 100svw;
     padding: .3px;
     display: block;
-    background: linear-gradient( rgb(0, 0, 0) , #8f8787);
+    background: linear-gradient( black , grey);
 }
 .layer-1{
     position: absolute;   
@@ -88,14 +94,13 @@ body{
     backface-visibility: hidden;
 }
 
-.layer-1:nth-of-type(1) .layer-2{background-color: rgba(127, 255, 212, 0.62);}
-.layer-1:nth-of-type(2) .layer-2{background-color: rgba(255, 99, 71, 0.568);}
-.layer-1:nth-of-type(3) .layer-2{background-color: rgba(65, 105, 225, 0.595);}
+.layer-1:nth-of-type(1) .layer-2{background-color: var(--cyan-semi-transparent);}
+.layer-1:nth-of-type(2) .layer-2{background-color: var(--tomato-semi-transparent);}
+.layer-1:nth-of-type(3) .layer-2{background-color: var(--metal-blue-semi-transparent);}
 
 .layer-1:nth-of-type(1) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
 .layer-1:nth-of-type(2) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
 .layer-1:nth-of-type(3) .layer-2{transform: translateZ( calc( var(--perspective) / 2 ) );}
-
 
 nav{
     --nav-len:2rem;
@@ -106,7 +111,6 @@ nav{
     aspect-ratio: 1;
     z-index: 13;
 }
-
 nav::before,
 nav::after{
     content:'';
@@ -117,7 +121,7 @@ nav::after{
     display: grid;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(58, 58, 58, 0.5);
+    box-shadow: 0 0 0 0 var(--black-semi-transparent);
 }
 nav::after{
     animation : pulse 1s 1s alternate infinite ;
@@ -128,7 +132,7 @@ nav::before{
 nav button{
     outline: none;
     border: none;
-    background-color: rgba(0, 0, 0, 0.508);
+    background-color: var(--black-semi-transparent);
     position: absolute;
     inset: 0;
     scale: 0;
@@ -153,31 +157,31 @@ nav button :hover{
     position: absolute;
     appearance: none;
     display: block;
+    outline:none;
     background-color: black;
     border-radius: 50%;
 }
 nav:has(:checked) { 
     transform: translate(calc(var(--nav-len) * 1),calc( var(--nav-len) * -1));
 }
-
 nav :checked~button{
     scale:1;
     pointer-events: initial;
     display: block;
 }
 nav :checked~[to="home"]{
-    transform: translate(0rem, 4rem);
+    transform: translate(0rem, 3rem);
 }
 nav :checked~[to="aboutme"]{
-    transform:translate( -4rem,4rem);
+    transform:translate( -3rem,3rem);
 }
 nav :checked~[to="contactme"]{
-    transform:translate(-4rem ,0rem);
+    transform:translate(-3rem ,0rem);
 }
 
 @keyframes pulse {
     to{
-        box-shadow: 0 0 0 1vh rgba(58, 58, 58, 0.608);
+        box-shadow: 0 0 0 1vh var(--black-semi-transparent);
     }
 }
 

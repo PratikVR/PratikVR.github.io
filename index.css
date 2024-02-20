@@ -32,7 +32,6 @@
     align-content: flex-start;
     gap:2rem;
 }
-
 .me{
     aspect-ratio: 1;
     min-height: 70vh;
@@ -74,7 +73,6 @@
     border-radius: .3rem;
     padding-left:.5rem ;
 }
-
 img{
     font-size: small;
     font-style: italic;
