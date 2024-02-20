@@ -98,7 +98,7 @@ body{
 
 
 nav{
-    --nav-len:3rem;
+    --nav-len:2rem;
     position: fixed;
     bottom: 2rem;
     left: 2rem;
@@ -106,30 +106,43 @@ nav{
     aspect-ratio: 1;
     z-index: 13;
 }
-nav span{
-    border-radius:50%;
-    opacity: .4;
-    pointer-events: none;
-    position:absolute;
-    inset: 1rem;
-    background-color: aliceblue;
-    animation: 3s linear infinite throbbing;
+
+nav::before,
+nav::after{
+    content:'';
+    height:100%;
+    z-index: -1;
+    background-color: transparent;
+    position: absolute;
+    display: grid;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(58, 58, 58, 0.5);
+}
+nav::after{
+    animation : pulse 1s 1s alternate infinite ;
+}
+nav::before{
+    animation : pulse 2s forwards ;
 }
 nav button{
     outline: none;
     border: none;
     background-color: rgba(0, 0, 0, 0.508);
-    background-blend-mode:multiply;
     position: absolute;
     inset: 0;
     scale: 0;
     text-align: center;
     pointer-events: none;
-    mix-blend-mode: multiply;
     border-radius:50%;
 }
+nav button img{
+    display: block;
+    height: 80%;
+    aspect-ratio:  1/1;
+}
 nav,nav button{
-    transition: .6s linear transform,1s .4s ease scale;
+    transition: .5s linear transform,1s .4s ease scale;
 }
 nav button :hover{
     scale: 1.2;
@@ -146,12 +159,7 @@ nav button :hover{
 nav:has(:checked) { 
     transform: translate(calc(var(--nav-len) * 1),calc( var(--nav-len) * -1));
 }
-nav:has(:checked) #navbar{
-    transform: scale(.7);
-}
-nav:has(:checked) span{
-    animation-play-state: paused;
-}
+
 nav :checked~button{
     scale:1;
     pointer-events: initial;
@@ -167,15 +175,12 @@ nav :checked~[to="contactme"]{
     transform:translate(-4rem ,0rem);
 }
 
-.loader{
-    display : block;
-    margin-top: 0.5rem;
-    height: 1rem;
-    width: 100%;
-    animation:load-width 1s linear;
-    background : linear-gradient(rgba(255, 217, 0, 0.404),rgba(0, 0, 255, 0.29)),
-    linear-gradient(45deg,rgba(0, 195, 255, 0.404),rgba(255, 162, 0, 0.29));
+@keyframes pulse {
+    to{
+        box-shadow: 0 0 0 1vh rgba(58, 58, 58, 0.608);
+    }
 }
+
 @keyframes load-width {
     from{
         width:0%;
