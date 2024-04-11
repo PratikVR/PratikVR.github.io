@@ -1,0 +1,379 @@
+/* everything */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*
+* custom properties that made this work easier! 
+* LINK ./custom-properties.css
+*/
+container {
+    /*
+        Styles
+    */
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap:2rem;
+    grid-template-areas: 
+    'boxes boxes'
+    'joystick1 joystick2';
+    /*
+        animation properties 
+    */
+    --animation-duration:4s;
+    --animation-name:none;
+    --animation-play-state:paused;
+    --animation-direction:normal;
+    /* 
+        perspective 
+    */
+    --perspective:700px;
+    --perspective-origin-x:50%;
+    --perspective-origin-y:50%;
+    /*
+        position 
+    */
+    --item-pos-x:0px;
+    --item-pos-y:0px;
+    --item-pos-z:0px;
+    /* 
+        rotation vectors 
+    */
+    --rx:0;
+    --ry:0;
+    --rz:0;
+
+    /*
+        Joystick-Controls  
+    */
+    &:has(.direction-up:active){
+        --animation-play-state:running;
+        --animation-name: rotate-viewX;
+        --animation-direction: normal;
+    }
+    &:has(.direction-down:active){
+        --animation-play-state: running ;
+        --animation-name: rotate-viewX;
+        --animation-direction: reverse;
+    }      
+    &:has(.direction-left:active){
+        --animation-play-state: running;
+        --animation-name: rotate-viewY;
+        --animation-direction: reverse;
+    }
+    &:has(.direction-right:active){
+        --animation-play-state:running;
+        --animation-name: rotate-viewY;
+        --animation-direction: normal;
+    }      
+    &:has(.go-up:active){
+        --animation-play-state:running;
+        --animation-name: moveY;
+        --animation-direction: reverse;
+    }
+    &:has(.go-down:active){
+        --animation-play-state: running ;
+        --animation-name: moveY;
+        --animation-direction: normal;
+    }
+    &:has(.go-left:active){
+        --animation-play-state: running;
+        --animation-name: moveX;
+        --animation-direction: reverse;
+    }
+    &:has(.go-right:active){
+        --animation-play-state:running;
+        --animation-name: moveX;
+        --animation-direction: normal;
+    }
+    &:has(.skew-x:active){
+        --animation-name:skewX;
+        --animation-play-state:running;
+        --animation-direction:normal;
+    }
+    &:has(.skew-y:active){
+        --animation-name:skewY;
+        --animation-play-state:running;
+        --animation-direction:normal;
+    }
+    &:has(.backward-3d:active){
+        --animation-name:moveZ;
+        --animation-play-state:running;
+        --animation-direction:reverse;
+    }
+    &:has(.forward-3d:active){
+        --animation-name:moveZ;
+        --animation-play-state:running;
+        --animation-direction:normal;
+    }   
+    /* 
+        perspective controls:
+    */
+    &:has(.top-left :checked){
+        --perspective-origin-x: 0%;
+        --perspective-origin-y: 0%;
+    }
+    &:has(.top :checked){
+        --perspective-origin-x: 50%;
+        --perspective-origin-y: 0%;
+    }
+    &:has(.top-right :checked){
+        --perspective-origin-x: 100%;
+        --perspective-origin-y: 0%;
+    }
+    &:has(.left :checked){
+        --perspective-origin-x: 0%;
+        --perspective-origin-y: 50%;
+    }
+    &:has(.center :checked){
+        --perspective-origin-x: 50%;
+        --perspective-origin-y: 50%;
+    }
+    &:has(.right :checked){
+        --perspective-origin-x: 100%;
+        --perspective-origin-y: 50%;
+    }
+    &:has(.bottom-left :checked){
+        --perspective-origin-x: 0%;
+        --perspective-origin-y: 100%;
+    }
+    &:has(.bottom :checked){
+        --perspective-origin-x: 50%;
+        --perspective-origin-y: 100%;
+    }
+    &:has(.bottom-right :checked){
+        --perspective-origin-x: 100%;
+        --perspective-origin-y: 100%;
+    }
+}
+grid{
+    grid-area: boxes;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    grid-template-rows: repeat(3,auto);
+    place-items: center;
+    aspect-ratio: 1/1;
+    height: 25rem;
+    border-radius:5% ;
+    background: no-repeat linear-gradient(lightblue 10%, limegreen);
+    perspective: var(--perspective);
+    overflow: hidden;
+    perspective-origin: var(--perspective-origin-x) var(--perspective-origin-y);
+}
+.perspective{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+/* 
+    cell is like a skeleton for the 3D-cube
+*/
+cell{
+    position : absolute;
+    display: block;
+    /* 
+        animations !
+    */
+    animation: var(--animation-name) var(--animation-duration) var(--animation-direction) infinite;
+    animation-play-state: var(--animation-play-state);
+    animation-timing-function: linear;
+    /* 
+        styles !
+    */
+    aspect-ratio: 1/1;
+    height: 5em;
+    border-radius: 5%;
+    /* 
+    transforms  !
+    */
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    transform:
+        skew(
+            var(--skew-x),
+            var(--skew-y)
+        )
+        translate3d(
+            var(--item-pos-x) ,
+            var(--item-pos-y) ,
+            var(--item-pos-z)
+            )
+        rotate3d(
+            var(--rx),
+            var(--ry),
+            var(--rz),
+            var(--degree)
+            );
+}
+/* 
+    layers of cell that makes the cube
+*/
+i{
+    inset: 0;
+    background:rgba(255, 0, 0, 0.304);
+    position: absolute;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+}
+i:nth-child(1){transform: translateZ( 2.5em); background: rgba(247, 3, 3, 0.35);}
+i:nth-child(2){transform: translateZ(-2.5em); background: rgba(3, 247, 3, 0.35);}
+i:nth-child(3){transform: translateX( 2.5em) rotateY( 90deg); background: rgba(3, 3, 247, 0.35);}
+i:nth-child(4){transform: translateX(-2.5em) rotateY(-90deg);background: rgba(247, 3, 247, 0.35);}
+i:nth-child(5){transform: translateY( 2.5em) rotateX( 90deg);background: rgba(247, 247, 3, 0.35);}
+i:nth-child(6){transform: translateY(-2.5em) rotateX(-90deg);background: rgba(3, 247, 247, 0.35);}
+/* 
+
+*/
+joystick{
+    padding: 8px;
+    font-weight: 1000;
+    color:black;
+    background-color: rgb(52, 52, 200);
+    border-radius:8% ;
+    position: relative;
+    display:grid;
+    place-content: center;
+    grid-template-areas:
+    'text text text' 
+    'forward-3d up  skew-x'
+    'left  3d right'
+    'skew-y down backward-3d';
+}
+joystick h2{
+    text-align: center;
+    grid-area: text;
+}
+joystick:nth-child(1){
+    grid-area: joystick1;
+}
+joystick:nth-child(2){
+    grid-area: joystick2;
+}
+box{
+    cursor: pointer;
+    text-align: center;
+    height: 50px;
+    aspect-ratio: 1/1;
+}
+
+/*------------------ SKEW-------------------- */
+.skew-x{grid-area: skew-x;}
+.skew-y{grid-area: skew-y;}
+/*----------------- 3D-movement-------------- */
+.backward-3d{grid-area: backward-3d;}
+.forward-3d{grid-area: forward-3d;}
+/* --------------ROTATE & MOVE -------------- */
+.direction-up,.go-up{
+    background-color: green;
+    grid-area: up;
+}
+.direction-down,.go-down{
+    background-color: yellow;
+    grid-area: down;
+}
+.direction-right,.go-right{
+    background-color: blue;
+    grid-area: right;
+}
+.direction-left,.go-left{
+    background-color: brown;
+    grid-area: left;
+}
+
+/* animations! */
+/* rotate */
+@keyframes rotate-viewX {
+    from{
+        --rx:1;
+        --ry:0;
+        --rz:0;
+        --degree:0deg;
+        /* --item-pos-x:-50%; */
+    }
+    to{
+        --rx:1;
+        --ry:0;
+        --rz:0;
+        --degree:360deg;
+        /* --item-pos-x:50%; */
+    }
+}
+@keyframes rotate-viewY {
+    from{
+        --rx:0;
+        --ry:1;
+        --rz:0;
+        --degree:0deg;
+        /* --item-pos-y:-50%; */
+    }
+    to{
+        --rx:0;
+        --ry:1;
+        --rz:0;
+        --degree:360deg;
+        /* --item-pos-y:50%; */
+    }
+}
+@keyframes rotate-viewZ {
+    from{
+        --rx:0;
+        --ry:0;
+        --rz:1;
+        --degree:0deg;
+        /* --item-pos-y:-50%; */
+    }
+    to{
+        --rx:0;
+        --ry:0;
+        --rz:1;
+        --degree:360deg;
+        /* --item-pos-y:50%; */
+    }
+}
+/* move */
+@keyframes moveX {
+    from {
+        --item-pos-x: 0%;
+    }
+    to {
+        --item-pos-x: 50%;
+    }
+}
+@keyframes moveY {
+    from {
+        --item-pos-y: 0%;
+    }
+    to {
+        --item-pos-y: 50%;
+    }
+}
+@keyframes moveZ {
+    from {
+        --item-pos-z: 0px;
+    }
+    to {
+        --item-pos-z: 150px;
+    }
+}
+/* skew */
+@keyframes skewX {
+    from {
+        --skew-x: 0deg;
+    }
+    to {
+        --skew-x: 45deg;
+    }
+}
+@keyframes skewY {
+    from {
+        --skew-y: 0deg;
+    }
+    to {
+        --skew-y: 45deg;
+    }
+}

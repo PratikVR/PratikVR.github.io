@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+@property --rotate-x-deg {
+  initial-value:  0deg;
+  inherits: false;
+  syntax: "<angle>";
+}
+@property --rotate-y-deg {
+  initial-value: 0deg;
+  inherits: false;
+  syntax: "<angle>";
+}
+body {
+  margin-top: 10rem;
+  background-color: black;
+  display: grid;
+  place-content: normal;
+  justify-items: center;
+}
+.container {
+  perspective: 1000rem;
+  perspective-origin: center;
+  transform-style: preserve-3d;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, auto);
+  gap: 2rem;
+}
+.cell {
+  z-index: 10;
+  background:transparent;
+  position: relative;
+  width: 10rem;
+  aspect-ratio: 1/1;
+}
+
+#res{
+  display: grid;
+  grid-template-areas: 
+  'description description description' 
+  'player1 matches player2';
+  position: absolute;
+  height: 8rem;
+  width: 50rem;
+  padding: 1rem 5rem;
+  color: aliceblue;
+  border-radius: 100vh;
+  top:calc(10% - 3.5rem);
+  background-color: rgb(255, 255, 255,0.2);
+  border: 1px solid rgba(56, 255, 2, 0.507);
+  font-size: 1.5rem;
+  text-align: center;
+  text-transform:uppercase;
+  z-index: 999;
+}
+#res .description{
+  grid-area: description;
+}
+#player1-score,#player2-score,#total-matches{
+  display: block;
+  height: 1.7rem;
+}
+#player1-score{
+  grid-area: player1;
+  background-color: blue;
+}
+#player2-score{
+  grid-area: player2;
+  background-color: red;
+}
+#total-matches{
+  grid-area: matches;
+  color:black;
+  background-color: white;
+}
+#tree{
+  position: relative;
+  display: flex;
+  padding: 3rem 0rem;
+  width: 100%;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+#tree>h3{
+  color: white;
+  position: absolute;
+  top:20px;
+} 
+.node{
+  display: grid;
+  grid-template-areas: 
+  'data children';
+  position: relative;
+  font-size: 1.8rem;
+  gap:1.8rem;
+  align-items: center;
+  overflow: visible;
+}
+.node p{
+  background-color: rgba(248, 246, 247, 0.192);
+  align-self: flex-start;
+  position: relative;
+  display: block;
+  color : white;
+  grid-area: data;
+  width: 8ch;
+  aspect-ratio: 1/1;
+  pointer-events: none;
+}
+.node p::after{
+  content:"=>";
+  color:rgb(255, 255, 255);
+  font-size: 1.8rem;
+  width: 2ch;
+  display: block;
+  position: absolute;
+  top:40%;
+  bottom: 40%;
+  left: 100%;
+}
+.node .children{
+  grid-area: children;
+}
+
+.children{
+  border:solid rgb(255, 255, 255);
+  border-width: 0px 0px 0px 1.2px;
+  border-top-left-radius: 1ch 1ch; 
+  display: flex;
+  flex-direction: column;
+  gap: 2ch;
+}
+
+
+/* 3D-cube-logic */
+.rotate {
+  background: transparent;
+  position: relative;
+  width: 10rem;
+  aspect-ratio: 1/1;
+  font-size: 4rem;
+  transform-origin: center;
+  perspective: 1000rem;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  transition: transform 0.8s ease-in-out;
+}
+.rotate div {
+  width: 10rem;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  pointer-events: none;
+}
+.rotate div:nth-of-type(1) {
+  transform: translateZ(5rem);
+  background-color: rgba(0, 255, 0, 0.5);
+}
+.rotate div:nth-of-type(2) {
+  background-color: rgba(0, 0, 255, 0.609);
+  transform: translateY(-50%) rotateX(-90deg);
+}
+.rotate div:nth-of-type(3) {
+  background-color: rgba(255, 0, 0, 0.568);
+  transform: translateX(-50%) rotateY(-90deg);
+}
+.rotate div:nth-of-type(4) {
+  transform: translateZ(-5rem);
+  background-color: rgba(100, 100, 255, 0.523);
+}
+.rotate div:nth-of-type(5) {
+  background-color: rgba(255, 255, 0, 0.609);
+  transform: translateY(50%) rotateX(90deg);
+}
+.rotate div:nth-of-type(6) {
+  background-color: rgba(0, 255, 255, 0.568);
+  transform: translateX(50%) rotateY(90deg);
+}
+.container .cell:nth-of-type(1) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(2) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(3) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(4) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(5) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(6) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(7) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(8) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}
+.container .cell:nth-of-type(9) .rotate {
+  --rotate-x-deg:  0deg;
+  --rotate-y-deg: 0deg;
+  transform: rotateX(var(--rotate-x-deg)) rotateY(var(--rotate-y-deg));
+}

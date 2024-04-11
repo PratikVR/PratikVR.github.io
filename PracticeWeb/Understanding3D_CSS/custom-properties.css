@@ -1,0 +1,70 @@
+@property --degree{
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+@property --skew-x{
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+@property --skew-y{
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+@property --perspective{
+    syntax: "<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --perspective-origin-x{
+    syntax: "<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --perspective-origin-y{
+    syntax: "<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --perspective-origin-z{
+    syntax: "<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --animation-name{
+    syntax: "none | <custom-ident>";
+    inherits: true;
+    initial-value: none;
+} 
+@property --animation-play-state{
+    syntax: "running | paused";
+    inherits: true;
+    initial-value:running;
+}
+@property --animation-direction{
+    syntax: "normal | reverse | alternate | alternate-reverse";
+    inherits: true;
+    initial-value:normal;
+} 
+@property --item-pos-x{
+    syntax:"<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --item-pos-y{
+    syntax:"<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --item-pos-z{
+    syntax:"<length> | <length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+@property --animation-duration{
+    syntax:"<time>";
+    inherits: true;
+    initial-value: 0s;
+}
