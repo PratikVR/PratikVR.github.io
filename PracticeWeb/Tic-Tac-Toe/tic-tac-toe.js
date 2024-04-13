@@ -36,7 +36,7 @@ function initGame() {
     board.push(null);
   }
   turn = "X";
-  
+  console.log('initial board :',board)
 }
 
 // false : game is not over , "X" or "O": winner , "draw" : match draw
@@ -55,8 +55,6 @@ function evaluate(boardState=board) {
   }
   return winner;
 }
-
-
 // false : game is not over or draw  , "X"  or "O"  : game over
 function check(array=board) {
   //diagonals
@@ -139,15 +137,14 @@ function displayRes(textRes){
 }
 
 function drawTree(array){
-  let root = new Array(...array);
-  let tree = new minmaxTree(root, 6, "O", "X");
+  let root = Array.from(array);
+  let tree = new minmaxTree(root,0,0,5, "O", "X");
   if(turn=='O'){
     tree.evaluateMax()
   }
   else if(turn=="X"){
     tree.evaluateMin()
   }
-  printNodes(tree)
   let nextMove
   if(turn=='X'){
     nextMove = minimax(tree,false)
@@ -155,12 +152,10 @@ function drawTree(array){
   else if(turn=='O'){
     nextMove = minimax(tree,true)
   }
-  console.log(nextMove)
+  printNodes(tree,nextMove.node,null)
+  console.log("nextMove",nextMove)
 }
 
 //game initialization
 initGame();
 initBoard();
-let root = new Array(...board);
-let tree = new minmaxTree(root, 6, "O", "X");
-console.log(minimax(tree,true))

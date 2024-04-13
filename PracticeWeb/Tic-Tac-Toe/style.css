@@ -134,7 +134,9 @@ body {
   flex-direction: column;
   gap: 2ch;
 }
-
+.best-move{
+  background-color: green;
+}
 
 /* 3D-cube-logic */
 .rotate {
