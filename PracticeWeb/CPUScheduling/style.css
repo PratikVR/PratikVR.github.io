@@ -93,7 +93,7 @@ body{
 }
 
 .CPU{
-    background: no-repeat  url('https://user-images.githubusercontent.com/150180168/281146379-6f2fb22c-84dd-476a-9391-77392f9296d5.png');
+    background: no-repeat  url('/images/cpu.png');
     background-size: contain;
     text-align: center;
     font-size: x-large;
