@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form"  >
+        <div>
+            <label for="processID">Process ID : </label>
+            <input type="text" maxlength="4" id="processID"> 
+        </div>
+        <div>
+            <label for="arrivalTime">Arrival Time : </label>
+            <input type="number"  min="0"  id="arrivalTime">
+        </div>
+        <div>
+            <label for="burstTime">Burst Time :</label>
+            <input type="number" min="1" id="burstTime">
+        </div>
+        <div>
+            <button type="submit" name="Add" class="add">Add</button>
+        </div>
+        <div class="animateBtn">
+            <label for="algo">Algorithm </label>
+            <select id="algo">
+                <option value="select">--select--</option>
+                <option value="FCFS">FCFS</option>
+                <option value="SJF">SJF</option>
+            </select>
+            <button class="animateBtns">Animate</button>
+        </div>
+    </form>
+    <div class="animationPane">
+        <span class="queue">QUEUE</span>
+        <!-- <div class="test">test</div> -->
+        <span class="CPU"></span>
+        
+    </div>
+    
+<script src="app.js"></script>
+</body>
+</html>

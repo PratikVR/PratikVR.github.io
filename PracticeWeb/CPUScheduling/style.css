@@ -1,0 +1,200 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, sans-serif;
+    font-size:clamp(18px,3vw,24px);
+}
+body{
+    /* POSITION */
+    position: relative;
+    /* SIZE */
+    height:100vh;
+    min-width: 320px;
+    min-height: 650px;
+    /* HOW TO DISPLAY  */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: start;
+    justify-content: left;
+}
+.form{
+    background: gray;
+    padding: 2vh 0;
+    /* HOW TO DISPLAY  */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* POSITION */
+    position: relative;
+    /* SIZE */
+    height: 100%;
+    width: 25%; 
+}
+.form div{
+    margin: 0px 1vw;
+    /* HOW TO DISPLAY */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+}
+.form div label{
+    font-size:clamp(18px,3vw,24px);
+    font-weight: 600;
+}
+.form div input{
+    width: 70%;
+    outline: none;
+}
+.animationPane{
+    background-color: rgb(0, 0, 0);
+    padding: 2vh 2vw;
+    /* HOW TO DISPLAY */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    /* POSITION */
+    position: relative;
+    /* SIZE */
+    height: 100%;
+    width: 75%;
+}
+.animationPane div{
+    background : linear-gradient(127deg,rgb(0, 225, 255),rgb(221, 0, 255));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    border-radius: 8% 3%;
+    padding: 5px;
+    margin: 2px;
+    border: 2px solid rgb(118, 116, 116);
+    /* POSITION */
+    position :relative;
+    /* SIZE */
+    height: fit-content;
+    width: fit-content;
+    overflow: visible;
+    z-index: 3;
+    /* font  */
+    font-weight: bold;
+}
+.queue{
+    background-color: grey;
+    /* HOW TO DISPLAY */
+    display: inline-block;
+    /* SIZE */
+    width: 100%;
+    /* POSITION */
+    align-self: flex-start;
+}
+
+.CPU{
+    background: no-repeat  url('https://user-images.githubusercontent.com/150180168/281146379-6f2fb22c-84dd-476a-9391-77392f9296d5.png');
+    background-size: contain;
+    text-align: center;
+    font-size: x-large;
+    /* HOW TO DISPLAY */
+    display: block;
+    aspect-ratio: 1/1;
+    /* POSITION */
+    position: fixed;
+    top: calc(50% - 10vh);
+    left: calc(67% - 10vh);
+    z-index: 2;
+    /* SIZE */
+    height: 20vh;
+}
+
+button{
+    background-color: rgb(57, 57, 57);
+    color: rgb(255, 255, 255);
+    height: 4vw;
+    padding: 0 2vw;
+    border-radius: 8% 3%;
+    width: auto;
+    min-width: 60px;
+    margin : 2vh auto;
+}
+.animateBtn {
+    position: absolute;
+    bottom: 5vh;
+}
+
+@keyframes flyin {
+    from{
+        position: fixed;
+    }
+    to{
+        position: fixed;
+        translate : calc(40vw - 50%) calc(50vh - 50%)
+    }
+}
+
+.flyin{
+    animation: flyin 2s ease-in 0ms 1  forwards;
+}
+
+@keyframes processing {
+    from{ 
+        position:fixed;
+        aspect-ratio: 1/1;
+        border-color: transparent;
+        background-clip:none;
+        -webkit-background-clip:none;
+        border-top:rgb(255, 255, 255) solid 4px;
+        color: transparent;
+        background: transparent;
+        border-radius: 50%;
+        translate: calc(40.5dvw - 50%) calc(50vh - 50%) ;
+        rotate: 0deg;
+    }
+    to{
+        position: fixed;
+        aspect-ratio: 1/1;
+        border-top : 1px rgb(255, 255, 255);
+        background-clip:none;
+        -webkit-background-clip:none;
+        rotate: 360deg;
+        color: transparent;
+        background: transparent;
+        border-radius: 50%;
+        translate: calc(40.5dvw - 50%) calc(50vh - 50%) ;
+        display: none;
+    }
+}
+
+.processing {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-top:rgb(255, 255, 255) solid 4px;
+    background-clip:none;
+    -webkit-background-clip:none;
+    color: transparent;
+    background: transparent;
+    border-radius: 50%;
+    animation: processing 2s ease 0ms 2  forwards;
+}
+
+.Reset{
+    position:absolute;
+    bottom: 5vh;
+    right: 50%;
+}
+
+/* If the screen size is 601px wide or more, set the font-size  to 80px */
+@media screen and (min-width: 601px) {
+    * {
+      font-size: 16px;
+    }
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size  to 30px */
+  @media screen and (max-width: 600px) {
+    * {
+      font-size: 2.5vw;
+    }
+  }
