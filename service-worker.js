@@ -1,5 +1,5 @@
 // Define the cache name and assets to cache
-const cacheName = 'portfolio-v1';
+const cacheName = 'portfolio-v1.2';
 const assetsToCache = [
   '/',
   '/index.html',
