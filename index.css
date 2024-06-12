@@ -40,14 +40,16 @@
 .me{
     aspect-ratio: 1;
     min-height: 70vh;
+    overflow: hidden;
 }
 .me img{
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     display: block;
     text-align: center;
     font-style: italic;
-    display: block;
 }
+
 .description{
     text-align: balance;
     font-size: 2rem;
