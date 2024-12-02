@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Noise Alarm System !</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				text-align: center;
+				margin-top: 50px;
+			}
+			h1 {
+				color: #333;
+			}
+			input {
+				margin: 10px;
+				padding: 5px;
+			}
+			.note{
+				font-size: x-small;
+				font-style: italic;
+				color:red;
+			}
+			button {
+				background-color: lightseagreen;
+				padding: 10px 20px;
+				margin: 10px;
+				outline: 0px;
+				border-width: 0px;
+			}
+			.log {
+				font-weight: bold;
+				color: blue;
+			}
+			[disabled]{
+				appearance: none;
+				border: 1px solid black;
+				background-color: #333;
+				color:white;
+			}
+			#max{
+				color : red;
+			}
+			#min{
+				color:green;
+			}
+			#avg{
+				color:orange;
+			}
+			#threshold{
+				color:cadetblue;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Setup Your Noise Alarm :</h1>
+		<div>
+			<!-- <span id="log" class="log">Logged Data: Initial value</span><br> -->
+			<span class="log">Current : <span id="current" >-</span></span><br>
+			<span class="log">Max : <span id="max" >-</span><br>
+			<span class="log">Average : <span id="avg" >-</span><br>
+			<span class="log">Min : <span id="min" >-</span><br>
+			<span class="log">Threshold : <span id="threshold" >-</span><br>
+		</div>
+		<br />
+		<label for="set-threshold">
+			Threshold:<span class="threshold-value"></span>
+			<br />
+			<input
+				type="number"
+				placeholder="enter value between 60-80"
+				min="60"
+				max="80"
+				required
+				id="set-threshold"
+			/>
+		</label>
+		<br />
+			<span class="note">* Enter a value between 60-80</span>
+		<br />
+		<button onclick="setValue(event)">Set Value</button>
+		<!-- <br /> -->
+		<!-- <button onclick="getValue(event)">Get Value</button> -->
+		<script>
+			// dummy value generation LOL
+			var dummyData = {current:60,threshold:72,min:30,max:60,avg:45,total:60, noOfReadings:1,
+				toCommaSeparatedKeysValuesString : ()=>{
+					const {min,max,avg,current,threshold} = dummyData
+					let str = ` min,${min.toFixed(2)},max,${max.toFixed(2)},avg,${avg.toFixed(2)},current,${current.toFixed(0)},threshold,${threshold}`
+					return str.trim();
+				}			
+			}
+				"use strict"
+				setInterval(
+					()=>{
+						let SIGN = parseFloat(Math.random().toFixed(2)) // between 0.00-1.00
+						SIGN -= (1-0.509999) // between -0.5001 to 0.5001 // the 0.009999 is to avoid the number being 0
+						SIGN = Math.sign(SIGN) // -1 or 1 
+						
+						let MAX_VARIANCE = Math.random() // between 0-1
+						MAX_VARIANCE *= 3 // between 0-3
+						MAX_VARIANCE += 3 // between 3-6
+						let change =  Math.random() // between 0-1
+						change *= MAX_VARIANCE // between 0-MAX_VARIANCE
+						
+						dummyData.current += SIGN * change
+						console.log(dummyData.current)
+						
+						// now the usual calculation :
+						dummyData.total+=dummyData.current
+						dummyData.noOfReadings += 1
+						dummyData.avg=dummyData.total/dummyData.noOfReadings
+
+						dummyData.max = dummyData.max < dummyData.current ? /* is this true ?*/
+						/*yes? max=current else max=max */ dummyData.current : dummyData.max
+						dummyData.min = dummyData.current < dummyData.min ? /* is this true ?*/
+						/*yes? min=current else min=min */ dummyData.current : dummyData.min	
+				}
+				,1000);
+		
+		// ACTUAL CODE STARTS FROM HERE : 
+			function viewData(data) {
+				console.log(data);
+				const entries = data.split(',');
+				for(let i=0; i<entries.length; i+=2){
+					[key,value] = [entries[i].trim(),entries[i+1].trim()]
+					document.getElementById(key).textContent= value;
+				}
+			}
+			async function setValue(event) {
+				event.preventDefault();
+				event.target.setAttribute('disabled','')
+				setTimeout(async ()=>{
+					let value = document.getElementById("set-threshold").value;
+					if (!value) {
+						alert("please enter a valid value !");
+						event.target.removeAttribute('disabled','')
+						return;
+					}
+					try {
+
+						//NOTE: the following code is for testing:
+						dummyData.threshold = value;	
+						alert("The current threshold is set to "+value);
+						
+						//NOTE : the following code will work in production
+						// const res = await fetch(
+						// 	"/set?value=" + encodeURIComponent(value)
+						// );
+           				// const data = await res.text();
+						// console.log(data);
+						// alert(data);
+					} catch (error) {
+           				console.log(error)
+           				alert("something went wrong!");
+         			}
+					finally{
+						event.target.removeAttribute('disabled');
+					}
+				},2000)
+			}
+
+			function getValue(event = null) {
+				if (event) event.preventDefault();
+				//NOTE : the following code is just for testing
+				viewData(dummyData.toCommaSeparatedKeysValuesString());
+
+				//NOTE : the following code will work in production 
+				// fetch("/get")
+				// 	.then((response) => response.text())
+				// 	.then((data) => viewData(data))
+				// 	.error((error) => alert("something wrong happened !"));
+			}
+			setInterval(() => {
+				getValue();
+			}, 1000);
+
+		</script>
+	</body>
+</html>
